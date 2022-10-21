@@ -1,0 +1,17 @@
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.exe
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.deps.json
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.runtimeconfig.json
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.runtimeconfig.dev.json
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.dll
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\bin\Debug\netcoreapp3.1\InfoBezWinFormsApp.pdb
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.csproj.AssemblyReference.cache
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.Form1.resources
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.csproj.GenerateResource.cache
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.AssemblyInfoInputs.cache
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.AssemblyInfo.cs
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.csproj.CoreCompileInputs.cache
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.dll
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.pdb
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.genruntimeconfig.cache
+C:\VSprojects\InfoBezWinFormsApp\InfoBezWinFormsApp\obj\Debug\netcoreapp3.1\InfoBezWinFormsApp.Form2.resources
