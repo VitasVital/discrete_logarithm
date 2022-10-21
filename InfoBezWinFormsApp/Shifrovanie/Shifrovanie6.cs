@@ -12,7 +12,7 @@ namespace InformationSecurityAPI.Shifrovanie
     {
         List<char> letter;
         List<char> letter_cryp;
-        Shifrovanie5 shifr5;
+        Shifrovanie5 shifrovanie5;
         BigInteger x;
         BigInteger y;
         public Shifrovanie6()
@@ -21,8 +21,9 @@ namespace InformationSecurityAPI.Shifrovanie
             {
                 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж',
                 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
-                'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч',
-                'ш', 'щ', 'ъ', 'ы', 'ь', 'ъ', 'э', 'ю', 'я'
+                'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 
+                'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'ъ', 'э', 
+                'ю', 'я'
             };
             
             letter_cryp = new List<char>()
@@ -30,7 +31,7 @@ namespace InformationSecurityAPI.Shifrovanie
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ','
             };
 
-            shifr5 = new Shifrovanie5();
+            shifrovanie5 = new Shifrovanie5();
         }
         
         public BigInteger NOD(BigInteger a, BigInteger b)
@@ -74,24 +75,17 @@ namespace InformationSecurityAPI.Shifrovanie
 
         public TextRequest6 Result_1(TextRequest6 textRequest6)
         {
-            for (int i = 0; i < textRequest6.input_text.Length; i++)
+            foreach (char input_letter in textRequest6.input_text)
             {
-                if (!letter.Contains(textRequest6.input_text[i]))
+                if (!letter.Contains(input_letter))
                 {
                     textRequest6.result_1 = "Ввели что-то неправильно";
                     return textRequest6;
                 }
             }
             
-            BigInteger num; //если не удалочь конвертировать, будет значение num
-            bool isNum_n = BigInteger.TryParse(textRequest6.bit_count, out num);
-            if (!isNum_n || textRequest6.bit_count[0] == '-')
-            {
-                textRequest6.result_1 = "Ввели что-то неправильно";
-                return textRequest6;
-            }
-            BigInteger _n = BigInteger.Parse(textRequest6.bit_count);
-            if (_n < 2)
+            BigInteger _n;
+            if (!BigInteger.TryParse(textRequest6.bit_count, out _n) || _n < 2)
             {
                 textRequest6.result_1 = "Ввели что-то неправильно";
                 return textRequest6;
@@ -120,7 +114,7 @@ namespace InformationSecurityAPI.Shifrovanie
                         continue;
                     }
                     
-                    if (shifr5.TestMillerRabin(result) == "Вероятно простое")
+                    if (shifrovanie5.TestMillerRabin(result) == "Вероятно простое")
                     {
                         if (num_p_q == 0)
                         {
@@ -142,7 +136,7 @@ namespace InformationSecurityAPI.Shifrovanie
 
             for (BigInteger i = 2; i < fi_n; i++)
             {
-                if (NOD(fi_n, i) == 1)
+                if (NOD(fi_n, i) == 1) // метод выжно из этого файла, присваивается x и y во время работы
                 {
                     e = i;
                     break;
@@ -158,9 +152,9 @@ namespace InformationSecurityAPI.Shifrovanie
                 d = fi_n + d;
             }
 
-            for (int i = 0; i < textRequest6.input_text.Length; i++)
+            foreach (char input_letter in  textRequest6.input_text)
             {
-                shifr_res.Add( shifr5.VozvedenieStepenPoModulu(letter.IndexOf(textRequest6.input_text[i]), e, n));
+                shifr_res.Add( shifrovanie5.VozvedenieStepenPoModulu(letter.IndexOf(input_letter), e, n));
             }
 
             textRequest6.P = p.ToString();
@@ -176,42 +170,40 @@ namespace InformationSecurityAPI.Shifrovanie
         
         public TextRequest6 Result_2(TextRequest6 textRequest6)
         {
-            for (int i = 0; i < textRequest6.cryptogram.Length; i++)
+            foreach (char input_letter in textRequest6.cryptogram)
             {
-                if (!letter_cryp.Contains(textRequest6.cryptogram[i]))
+                if (!letter_cryp.Contains(input_letter))
                 {
                     textRequest6.result_2 = "Ввели что-то неправильно";
                     return textRequest6;
                 }
             }
             
-            string[] cryptogram_numbers = textRequest6.cryptogram.Split(',');
-            
-            BigInteger num; //если не удалочь конвертировать, будет значение num
-            bool isNum_d = BigInteger.TryParse(textRequest6.input_d, out num);
-            bool isNum_n = BigInteger.TryParse(textRequest6.input_n, out num);
-            if (!isNum_d || !isNum_n || textRequest6.input_n[0] == '-')
+            BigInteger d;
+            BigInteger n;
+            if (!BigInteger.TryParse(textRequest6.input_d, out d) || !BigInteger.TryParse(textRequest6.input_n, out n) || n < 0)
             {
                 textRequest6.result_2 = "Ввели что-то неправильно";
                 return textRequest6;
             }
 
-            BigInteger d = BigInteger.Parse(textRequest6.input_d);
-            BigInteger n = BigInteger.Parse(textRequest6.input_n);
-
             List<int> input_message_res = new List<int>();
-            for (int i = 0; i < cryptogram_numbers.Length; i++)
+            string[] cryptogram_numbers = textRequest6.cryptogram.Split(',');
+            foreach (string numb in cryptogram_numbers)
             {
-                input_message_res.Add((int)shifr5.VozvedenieStepenPoModulu(BigInteger.Parse(cryptogram_numbers[i]), d, n));
+                input_message_res.Add((int)shifrovanie5.VozvedenieStepenPoModulu(BigInteger.Parse(numb), d, n));
             }
 
             textRequest6.result_2 = "";
-            for (int i = 0; i < input_message_res.Count; i++)
+            foreach (int numb_letter in input_message_res)
             {
-                textRequest6.result_2 += letter[input_message_res[i]];
+                if (numb_letter > letter.Count)
+                {
+                    textRequest6.result_2 = "Ввели что-то неправильно";
+                    return textRequest6;
+                }
+                textRequest6.result_2 += letter[numb_letter];
             }
-
-            //textRequest6.result_2 = String.Join(",", input_message_res);
             
             return textRequest6;
         }

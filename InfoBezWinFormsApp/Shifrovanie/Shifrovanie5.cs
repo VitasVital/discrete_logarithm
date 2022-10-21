@@ -11,10 +11,6 @@ namespace InformationSecurityAPI.Shifrovanie
 {
     public class Shifrovanie5
     {
-        public Shifrovanie5()
-        {
-        }
-
         private string ConvertToBinaty(BigInteger number)
         {
             string binary_letter = "";
@@ -33,7 +29,7 @@ namespace InformationSecurityAPI.Shifrovanie
         public BigInteger VozvedenieStepenPoModulu(BigInteger a, BigInteger alpha, BigInteger n)
         {
             //перевод alpha в двоичный вид
-            string binary_alpha = this.ConvertToBinaty(alpha);
+            string binary_alpha = ConvertToBinaty(alpha);
 
             List<BigInteger> number = new List<BigInteger>() { a };
             for (int i = 1; i < binary_alpha.Length; i++)
@@ -125,8 +121,6 @@ namespace InformationSecurityAPI.Shifrovanie
         
         public string TestMillerRabin(BigInteger _n)
         {
-            double k = BigInteger.Log(_n);
-            
             if (_n == 2 || _n == 3)
             {
                 return "Вероятно простое";
@@ -136,6 +130,7 @@ namespace InformationSecurityAPI.Shifrovanie
                 return "Составное";
             }
 
+            double k = BigInteger.Log(_n);
             // представим n − 1 в виде (2^s)·t, где t нечётно, это можно сделать последовательным делением n - 1 на 2
             BigInteger t = _n - 1;
             int s = 0;
@@ -269,113 +264,6 @@ namespace InformationSecurityAPI.Shifrovanie
             }
 
             return "Вероятно простое";
-        }
-
-        public TextRequest5 Result_1(TextRequest5 textRequest5)
-        {
-            BigInteger num; //если не удалочь конвертировать, будет значение num
-            bool isNum_n = BigInteger.TryParse(textRequest5.n, out num);
-            if (!isNum_n || textRequest5.n[0] == '-')
-            {
-                textRequest5.MillerRabin = "Вы ввели что-то неправильно";
-                textRequest5.SoloveyStrassen = "Вы ввели что-то неправильно";
-                textRequest5.Farm = "Вы ввели что-то неправильно";
-                return textRequest5;
-            }
-            BigInteger _n = BigInteger.Parse(textRequest5.n);
-            if (_n < 2)
-            {
-                textRequest5.MillerRabin = "Вы ввели что-то неправильно";
-                textRequest5.SoloveyStrassen = "Вы ввели что-то неправильно";
-                textRequest5.Farm = "Вы ввели что-то неправильно";
-                return textRequest5;
-            }
-            
-            textRequest5.MillerRabin = TestMillerRabin(_n);
-            textRequest5.SoloveyStrassen = TestSoloveyStrassen(_n);
-            textRequest5.Farm = TestFarm(_n);
-
-            return textRequest5;
-        }
-        public TextRequest5 Result_2(TextRequest5 textRequest5)
-        {
-            int num; //если не удалочь конвертировать, будет значение num
-            bool isNum_n = int.TryParse(textRequest5.bit_number, out num);
-            if (!isNum_n || textRequest5.bit_number[0] == '-')
-            {
-                textRequest5.generated_number = "Вы ввели что-то неправильно";
-                return textRequest5;
-            }
-            int _n = int.Parse(textRequest5.bit_number);
-            if (_n < 2)
-            {
-                textRequest5.generated_number = "Вы ввели что-то неправильно";
-                return textRequest5;
-            }
-            
-
-            if (textRequest5.test_number == 1)
-            {
-                while (true)
-                {
-                    var rng = new RNGCryptoServiceProvider();
-                    byte[] bytes = new byte[_n / 8];
-                    rng.GetBytes(bytes);
-                    BigInteger p = new BigInteger(bytes);
-                    if (p < 0)
-                    {
-                        continue;
-                    }
-                    
-                    if (TestMillerRabin(p) == "Вероятно простое")
-                    {
-                        textRequest5.generated_number = Convert.ToString(p);
-                        break;
-                    }
-                }
-            }
-            else if (textRequest5.test_number == 2)
-            {
-                while (true)
-                {
-                    var rng = new RNGCryptoServiceProvider();
-                    byte[] bytes = new byte[_n / 8];
-                    rng.GetBytes(bytes);
-                    BigInteger p = new BigInteger(bytes);
-                    if (p < 0)
-                    {
-                        continue;
-                    }
-                    
-                    if (TestSoloveyStrassen(p) == "Вероятно простое")
-                    {
-                        textRequest5.generated_number = Convert.ToString(p);
-                        break;
-                    }
-                }
-            }
-            else if(textRequest5.test_number == 3)
-            {
-                while (true)
-                {
-                    var rng = new RNGCryptoServiceProvider();
-                    byte[] bytes = new byte[_n / 8];
-                    rng.GetBytes(bytes);
-                    BigInteger p = new BigInteger(bytes);
-                    if (p < 0)
-                    {
-                        continue;
-                    }
-                    
-                    if (TestFarm(p) == "Вероятно простое")
-                    {
-                        textRequest5.generated_number = Convert.ToString(p);
-                        break;
-                    }
-                }
-            }
-            
-            return textRequest5;
         }
     }
 }

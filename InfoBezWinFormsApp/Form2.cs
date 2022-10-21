@@ -83,31 +83,6 @@ namespace InfoBezWinFormsApp
             y = list[ind][5];
         }
 
-        BigInteger GCD(BigInteger a, BigInteger b)
-        {
-            if (a == 0)
-            {
-                return b;
-            }
-            else
-            {
-                BigInteger min;
-                BigInteger max;
-                if (a > b)
-                {
-                    min = b;
-                    max = a;
-                }
-                else
-                {
-                    min = a;
-                    max = b;
-                }
-                //вызываем метод с новыми аргументами
-                return GCD(max - min, min);
-            }
-        }
-
         BigInteger ro_Pollard(BigInteger n)
         {
             BigInteger x = 4;
@@ -156,9 +131,9 @@ namespace InfoBezWinFormsApp
 
             // расшифровка
 
-            for (int i = 0; i < textBox1.Text.Length; i++)
+            foreach (char text_letter in textBox1.Text)
             {
-                if (!letter_cryp.Contains(textBox1.Text[i]))
+                if (!letter_cryp.Contains(text_letter))
                 {
                     textBox4.Text = "Ввели что-то неправильно";
                     return;
